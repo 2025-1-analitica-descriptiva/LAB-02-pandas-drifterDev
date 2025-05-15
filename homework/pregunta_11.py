@@ -12,7 +12,7 @@ def pregunta_11():
     los valores de la columna `c4` del archivo `tbl1.tsv`.
 
     Rta/
-         c0       c4
+            c0       c4
     0     0    b,f,g
     1     1    a,c,f
     2     2  a,c,e,f
@@ -22,3 +22,10 @@ def pregunta_11():
     38   38      d,e
     39   39    a,d,f
     """
+
+    import pandas as pd
+
+    df = pd.read_csv('files/input/tbl1.tsv', sep='\t')
+    grouped = df.groupby('c0')['c4'].apply(lambda x: ','.join(sorted(x.unique()))).reset_index()
+
+    return grouped
